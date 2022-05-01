@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  cnterra-rabbitmq:
+    image: rabbitmq:3.9
+    container_name: cnterra-rabbitmq
+    ports:
+      - 5672:5672
+    networks:
+      - cnterra-net
+
+  cnterra-loader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cnterra-loader:1.0
+    container_name: cnterra-loader
+    environment:
+      CNTERRA_SERIAL: ${CNTERRA_SERIAL}
+    restart: ${RESTART}
+    entrypoint: /opt/cnterra-loader/start.sh
+    devices:
+      - ${CNTERRA_SERIAL}
+    volumes:
+      - ${CNTERRA_DIR}/cnterra-loader:/opt/cnterra-loader/cnterra-loader
+      - ${CNTERRA_DIR}/tos-bsl.py:/opt/cnterra-loader/tos-bsl.py
+      - ${CNTERRA_DIR}/loader.sh:/opt/cnterra-loader/loader.sh
+      - ${CNTERRA_DIR}/start.sh:/opt/cnterra-loader/start.sh
+      - ${CNTERRA_DIR}/tmp:/opt/cnterra-loader/tmp
+    networks:
+      - cnterra-net
+    depends_on:
+      - cnterra-rabbitmq
+
+networks:
+  cnterra-net:
+    name: cnterra-net
