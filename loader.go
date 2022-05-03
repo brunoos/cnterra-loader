@@ -60,7 +60,7 @@ var (
 
 	rbUser = "guest"
 	rbPass = "guest"
-	rbAddr = "cnterra-rabbitmq"
+	rbAddr = "localhost"
 	rbPort = "5672"
 )
 

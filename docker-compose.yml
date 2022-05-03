@@ -1,12 +1,6 @@
 version: "3.9"
 
 services:
-  cnterra-rabbitmq:
-    image: rabbitmq:3.9
-    container_name: cnterra-rabbitmq
-    networks:
-      - cnterra-net
-
   cnterra-loader:
     build:
       context: .
@@ -16,6 +10,7 @@ services:
     environment:
       CNTERRA_SERIAL: /dev/ttyUSB0
       NODE_ID: 1
+      RABBITMQ_ADDRESS: localhost
     restart: always
     entrypoint: /opt/cnterra-loader/start.sh
     devices:
@@ -24,8 +19,6 @@ services:
       - /opt/cnterra-loader/tmp:/opt/cnterra-loader/tmp
     networks:
       - cnterra-net
-    depends_on:
-      - cnterra-rabbitmq
 
 networks:
   cnterra-net:
