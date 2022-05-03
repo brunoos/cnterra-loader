@@ -54,7 +54,7 @@ type Response struct {
 //------------------------------------------------------------------------------
 
 var (
-	nodeEx     = "node-"
+	nodeEx     = "cnterra-node"
 	ctrlEx     = "cnterra-ctrl"
 	serialPort = "/dev/ttyUSB0"
 
@@ -250,9 +250,9 @@ func dispatch(msgs <-chan amqp.Delivery) {
 
 func getEnv() {
 	if str, found := os.LookupEnv("NODE_ID"); !found {
-		log.Fatal("[ERRO] Variable 'NODE_ID' not found")
+		log.Fatal("[ERRO] Variable 'NODE_ID' not set")
 	} else {
-		nodeEx = "node-" + str
+		nodeEx = nodeEx + "-" + str
 	}
 	if str, found := os.LookupEnv("SERIAL_PORT"); found {
 		serialPort = str
