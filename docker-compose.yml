@@ -16,17 +16,13 @@ services:
     image: cnterra-loader:1.0
     container_name: cnterra-loader
     environment:
-      CNTERRA_SERIAL: ${CNTERRA_SERIAL}
-    restart: ${RESTART}
+      CNTERRA_SERIAL: /dev/ttyUSB0
+    restart: always
     entrypoint: /opt/cnterra-loader/start.sh
     devices:
-      - ${CNTERRA_SERIAL}
+      - /dev/ttyUSB0
     volumes:
-      - ${CNTERRA_DIR}/cnterra-loader:/opt/cnterra-loader/cnterra-loader
-      - ${CNTERRA_DIR}/tos-bsl.py:/opt/cnterra-loader/tos-bsl.py
-      - ${CNTERRA_DIR}/loader.sh:/opt/cnterra-loader/loader.sh
-      - ${CNTERRA_DIR}/start.sh:/opt/cnterra-loader/start.sh
-      - ${CNTERRA_DIR}/tmp:/opt/cnterra-loader/tmp
+      - /opt/cnterra-loader/tmp:/opt/cnterra-loader/tmp
     networks:
       - cnterra-net
     depends_on:
