@@ -74,8 +74,7 @@ var serialStatus int = SerialFree
 
 func failOnError(err error, msg string) {
 	if err != nil {
-		log.Printf("%s: %s", msg, err)
-		os.Exit(1)
+		log.Fatalf("%s: %s", msg, err)
 	}
 }
 
@@ -251,8 +250,7 @@ func dispatch(msgs <-chan amqp.Delivery) {
 
 func getEnv() {
 	if str, found := os.LookupEnv("NODE_ID"); !found {
-		log.Printf("[ERRO] Variable 'NODE_ID' not found")
-		os.Exit(1)
+		log.Fatal("[ERRO] Variable 'NODE_ID' not found")
 	} else {
 		nodeEx = "node-" + str
 	}
