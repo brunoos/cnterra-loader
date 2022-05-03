@@ -4,8 +4,6 @@ services:
   cnterra-rabbitmq:
     image: rabbitmq:3.9
     container_name: cnterra-rabbitmq
-    ports:
-      - 5672:5672
     networks:
       - cnterra-net
 
@@ -17,6 +15,7 @@ services:
     container_name: cnterra-loader
     environment:
       CNTERRA_SERIAL: /dev/ttyUSB0
+      NODE_ID: 1
     restart: always
     entrypoint: /opt/cnterra-loader/start.sh
     devices:

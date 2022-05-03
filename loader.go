@@ -54,13 +54,13 @@ type Response struct {
 //------------------------------------------------------------------------------
 
 var (
-	nodeEx     = "node-1"
+	nodeEx     = "node-"
 	ctrlEx     = "cnterra-ctrl"
 	serialPort = "/dev/ttyUSB0"
 
 	rbUser = "guest"
 	rbPass = "guest"
-	rbAddr = "localhost"
+	rbAddr = "cnterra-rabbitmq"
 	rbPort = "5672"
 )
 
@@ -74,7 +74,8 @@ var serialStatus int = SerialFree
 
 func failOnError(err error, msg string) {
 	if err != nil {
-		log.Panicf("%s: %s", msg, err)
+		log.Printf("%s: %s", msg, err)
+		os.Exit(1)
 	}
 }
 
@@ -249,6 +250,12 @@ func dispatch(msgs <-chan amqp.Delivery) {
 //------------------------------------------------------------------------------
 
 func getEnv() {
+	if str, found := os.LookupEnv("NODE_ID"); !found {
+		log.Printf("[ERRO] Variable 'NODE_ID' not found")
+		os.Exit(1)
+	} else {
+		nodeEx = "node-" + str
+	}
 	if str, found := os.LookupEnv("SERIAL_PORT"); found {
 		serialPort = str
 	}
