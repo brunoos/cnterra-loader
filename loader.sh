@@ -4,7 +4,7 @@
 
 PORT="$1"
 FILE="$2"
-IHEX="${INPUT}.ihex"
+IHEX="${FILE}.ihex"
 IHEXID="id-${IHEX}"
 
 msp430-objcopy --output-target=ihex $FILE $IHEX
