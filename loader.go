@@ -93,5 +93,5 @@ func main() {
 	r.POST("/load", load)
 
 	log.Println("[INFO] Loader running...")
-	r.Run()
+	r.Run(":" + config.Port)
 }

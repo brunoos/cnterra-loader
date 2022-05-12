@@ -7,5 +7,6 @@ docker run -it --rm \
  --network cnterra-net \
  -v ${DIR}:/opt/cnterra-loader \
  -p 8080:8080 \
+ -p 8081:8081 \
  cnterra-loader-dev:1.0 \
  /bin/bash

@@ -10,6 +10,7 @@ var (
 	BaseDir = "/opt/cnterra-loader/"
 	TmpDir  = "/opt/cnterra-loader/tmp/"
 
+	Port       = "8080"
 	NodeID     = 0
 	DataEx     = "cnterra-data"
 	SerialPort = "/dev/ttyUSB0"
@@ -30,9 +31,15 @@ func Initialize() {
 	} else {
 		log.Fatal("[ERRO] Variable 'NODE_ID' not set")
 	}
+
 	if str, found := os.LookupEnv("SERIAL_PORT"); found {
 		SerialPort = str
 	}
+
+	if str, found := os.LookupEnv("LOADER_PORT"); found {
+		Port = str
+	}
+
 	if str, found := os.LookupEnv("RABBITMQ_ADDRESS"); found {
 		RbAddress = str
 	}
