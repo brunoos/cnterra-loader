@@ -1,10 +1,11 @@
 #!/bin/bash
 
-mkdir -p tmp
+DIR=`pwd`
 
 docker run -it --rm \
  --device /dev/ttyUSB0 \
  --network cnterra-net \
- -v /opt/cnterra-loader:/opt/cnterra-loader \
+ -v ${DIR}:/opt/cnterra-loader \
+ -p 8080:8080 \
  cnterra-loader-dev:1.0 \
  /bin/bash
