@@ -74,7 +74,7 @@ func Relay() {
 	}
 	defer port.Close()
 
-	port.SetReadTimeout(50 * time.Millisecond)
+	port.SetReadTimeout(100 * time.Millisecond)
 
 	buffer := make([]byte, 1024)
 	for {

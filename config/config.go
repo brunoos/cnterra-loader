@@ -11,8 +11,7 @@ var (
 	TmpDir  = "/opt/cnterra-loader/tmp/"
 
 	NodeID     = 0
-	NodeEx     = "cnterra-node"
-	CtrlEx     = "cnterra-ctrl"
+	DataEx     = "cnterra-data"
 	SerialPort = "/dev/ttyUSB0"
 
 	RbAddress  = "localhost"
@@ -28,7 +27,6 @@ func Initialize() {
 			log.Fatal("[ERRO] Invalid 'NODE_ID'")
 		}
 		NodeID = int(n)
-		NodeEx = NodeEx + "-" + str
 	} else {
 		log.Fatal("[ERRO] Variable 'NODE_ID' not set")
 	}

@@ -36,7 +36,7 @@ func SendData(payload string) error {
 	}
 
 	return Channel.Publish(
-		config.CtrlEx, // exchange
+		config.DataEx, // exchange
 		"",            // routing key
 		false,         // mandatory
 		false,         // immediate
@@ -61,20 +61,7 @@ func Initialize() {
 	}
 
 	err = Channel.ExchangeDeclare(
-		config.NodeEx, // name
-		"fanout",      // type
-		true,          // durable
-		false,         // auto-deleted
-		false,         // internal
-		false,         // no-wait
-		nil,           // arguments
-	)
-	if err != nil {
-		log.Fatalf("[ERRO] Error declaring the node exchange: %s", err)
-	}
-
-	err = Channel.ExchangeDeclare(
-		config.CtrlEx, // name
+		config.DataEx, // name
 		"fanout",      // type
 		true,          // durable
 		false,         // auto-deleted
