@@ -1,12 +1,19 @@
 #!/bin/bash
 
+ID=1
+PORT=8080
+SERIAL=/dev/ttyUSB0
+RABBITMQ=localhost
 DIR=`pwd`
 
 docker run -it --rm \
- --device /dev/ttyUSB0 \
+ --device ${SERIAL} \
  --network cnterra-net \
  -v ${DIR}:/opt/cnterra-loader \
- -p 8080:8080 \
- -p 8081:8081 \
+ -p ${PORT}:${PORT} \
+ -e NODE_ID=${ID} \
+ -e RABBITMQ_ADDRESS=${RABBITMQ} \
+ -e LOADER_PORT=${PORT} \
+ -e SERIAL_PORT=${SERIAL} \
  cnterra-loader-dev:1.0 \
  /bin/bash
