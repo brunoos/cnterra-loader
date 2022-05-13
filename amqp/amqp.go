@@ -15,7 +15,7 @@ type NodeData struct {
 	Payload string `json:"payload"`
 }
 
-var Channel *amqp.Channel
+var channel *amqp.Channel
 
 //------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ func SendData(payload string) error {
 		Body:        buffer,
 	}
 
-	return Channel.Publish(
+	return channel.Publish(
 		config.DataEx, // exchange
 		"",            // routing key
 		false,         // mandatory
@@ -55,12 +55,12 @@ func Initialize() {
 		log.Fatalf("[ERRO] Error connecting to RabbitMQ: %s", err)
 	}
 
-	Channel, err = conn.Channel()
+	channel, err = conn.Channel()
 	if err != nil {
 		log.Fatalf("[ERRO] Error openning a channel: %s", err)
 	}
 
-	err = Channel.ExchangeDeclare(
+	err = channel.ExchangeDeclare(
 		config.DataEx, // name
 		"fanout",      // type
 		true,          // durable
