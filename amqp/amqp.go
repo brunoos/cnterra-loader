@@ -55,12 +55,12 @@ func Initialize() {
 
 	conn, err := amqp.Dial(url)
 	if err != nil {
-		log.Fatalf("[ERRO] Error connecting to RabbitMQ: %s", err)
+		log.Fatalln("[ERRO] Error connecting to RabbitMQ:", err)
 	}
 
 	channel, err = conn.Channel()
 	if err != nil {
-		log.Fatalf("[ERRO] Error openning a channel: %s", err)
+		log.Fatalln("[ERRO] Error openning a channel:", err)
 	}
 
 	err = channel.ExchangeDeclare(
@@ -73,6 +73,6 @@ func Initialize() {
 		nil,           // arguments
 	)
 	if err != nil {
-		log.Fatalf("[ERRO] Error declaring the controller exchange: %s", err)
+		log.Fatalln("[ERRO] Error declaring the controller exchange:", err)
 	}
 }

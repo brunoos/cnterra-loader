@@ -69,7 +69,7 @@ func Relay() {
 
 	port, err := serial.Open(config.SerialPort, mode)
 	if err != nil {
-		log.Printf("[ERRO] Error open serial port: %s", err)
+		log.Println("[ERRO] Error open serial port:", err)
 		return
 	}
 	defer port.Close()
@@ -80,7 +80,7 @@ func Relay() {
 	for {
 		n, err := port.Read(buffer)
 		if err != nil {
-			log.Printf("[ERRO] Error reading data: %s", err)
+			log.Println("[ERRO] Error reading data:", err)
 			return
 		}
 
@@ -88,7 +88,7 @@ func Relay() {
 			data := base64.StdEncoding.EncodeToString(buffer[:n])
 			err = amqp.SendData(data)
 			if err != nil {
-				log.Printf("[ERRO] Error sending data: %s", err)
+				log.Println("[ERRO] Error sending data:", err)
 				return
 			}
 		}

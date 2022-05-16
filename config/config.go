@@ -25,11 +25,11 @@ func Initialize() {
 	if str, found := os.LookupEnv("NODE_ID"); found {
 		n, err := strconv.ParseInt(str, 10, 0)
 		if err != nil {
-			log.Fatal("[ERRO] Invalid 'NODE_ID'")
+			log.Fatalln("[ERRO] Invalid 'NODE_ID'")
 		}
 		NodeID = int(n)
 	} else {
-		log.Fatal("[ERRO] Variable 'NODE_ID' not set")
+		log.Fatalln("[ERRO] Variable 'NODE_ID' not set")
 	}
 
 	if str, found := os.LookupEnv("SERIAL_PORT"); found {

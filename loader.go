@@ -40,7 +40,7 @@ func load(c *gin.Context) {
 	form := formLoad{}
 	err = c.Bind(&form)
 	if err != nil {
-		log.Printf("[ERRO] Error decoding the body: %s", err)
+		log.Println("[ERRO] Error decoding the body:", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "invalid body",
 		})
@@ -49,7 +49,7 @@ func load(c *gin.Context) {
 
 	data, err = base64.StdEncoding.DecodeString(form.Content)
 	if err != nil {
-		log.Printf("[ERRO] Error decoding content (base64): %s", err)
+		log.Println("[ERRO] Error decoding content (base64):", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "invalid body",
 		})
@@ -60,7 +60,7 @@ func load(c *gin.Context) {
 
 	err = ioutil.WriteFile(name, data, 0644)
 	if err != nil {
-		log.Printf("[ERRO] Error creating file: %s", err)
+		log.Println("[ERRO] Error creating file:", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "loading error",
 		})
@@ -75,7 +75,7 @@ func load(c *gin.Context) {
 	cmd := exec.Command(bin, config.SerialPort, name)
 	err = cmd.Run()
 	if err != nil {
-		log.Printf("[ERRO] Error running loader.sh: %s", err)
+		log.Println("[ERRO] Error running loader.sh:", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "loading error",
 		})
