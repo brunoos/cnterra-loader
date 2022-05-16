@@ -12,6 +12,7 @@ import (
 
 type NodeData struct {
 	NodeID  int    `json:"nodeid"`
+	Data    string `json:"data"`
 	Payload string `json:"payload"`
 }
 
@@ -22,6 +23,7 @@ var channel *amqp.Channel
 func SendData(payload string) error {
 	res := NodeData{
 		NodeID:  config.NodeID,
+		Data:    "out",
 		Payload: payload,
 	}
 
@@ -35,9 +37,10 @@ func SendData(payload string) error {
 		Body:        buffer,
 	}
 
+	routekey := fmt.Sprintf("node.%d.data.out", config.NodeID)
 	return channel.Publish(
 		config.NodeEx, // exchange
-		"data.out",    // routing key
+		routekey,      // routing key
 		false,         // mandatory
 		false,         // immediate
 		msg,           // body
