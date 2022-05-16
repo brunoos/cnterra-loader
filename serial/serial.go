@@ -85,7 +85,8 @@ func Relay() {
 		}
 
 		if n > 0 {
-			err = amqp.SendData(base64.StdEncoding.EncodeToString(buffer[:n]))
+			data := base64.StdEncoding.EncodeToString(buffer[:n])
+			err = amqp.SendData(data)
 			if err != nil {
 				log.Printf("[ERRO] Error sending data: %s", err)
 				return

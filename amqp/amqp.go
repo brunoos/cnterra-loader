@@ -33,14 +33,14 @@ func SendData(payload string) error {
 	}
 
 	msg := amqp.Publishing{
-		ContentType: "text/json",
+		ContentType: "application/json",
 		Body:        buffer,
 	}
 
-	routekey := fmt.Sprintf("node.%d.data.out", config.NodeID)
+	key := fmt.Sprintf("node.%d.data.out", config.NodeID)
 	return channel.Publish(
 		config.NodeEx, // exchange
-		routekey,      // routing key
+		key,           // routing key
 		false,         // mandatory
 		false,         // immediate
 		msg,           // body
