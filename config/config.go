@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -12,7 +13,7 @@ var (
 
 	Port       = "8080"
 	NodeID     = 0
-	DataEx     = "cnterra-data"
+	NodeEx     = "cnterra-node"
 	SerialPort = "/dev/ttyUSB0"
 
 	RbAddress  = "localhost"
@@ -28,6 +29,7 @@ func Initialize() {
 			log.Fatal("[ERRO] Invalid 'NODE_ID'")
 		}
 		NodeID = int(n)
+		NodeEx = fmt.Sprintf("%s-%d", NodeEx, NodeID)
 	} else {
 		log.Fatal("[ERRO] Variable 'NODE_ID' not set")
 	}

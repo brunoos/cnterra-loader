@@ -36,8 +36,8 @@ func SendData(payload string) error {
 	}
 
 	return channel.Publish(
-		config.DataEx, // exchange
-		"",            // routing key
+		config.NodeEx, // exchange
+		"data.out",    // routing key
 		false,         // mandatory
 		false,         // immediate
 		msg,           // body
@@ -61,8 +61,8 @@ func Initialize() {
 	}
 
 	err = channel.ExchangeDeclare(
-		config.DataEx, // name
-		"fanout",      // type
+		config.NodeEx, // name
+		"topic",       // type
 		true,          // durable
 		false,         // auto-deleted
 		false,         // internal
