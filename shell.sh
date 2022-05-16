@@ -3,7 +3,7 @@
 ID=1
 PORT=8080
 SERIAL=/dev/ttyUSB0
-RABBITMQ=localhost
+RABBITMQ=cnterra-rabbitmq
 DIR=`pwd`
 
 docker run -it --rm \
