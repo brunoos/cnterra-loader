@@ -10,6 +10,7 @@ var (
 	BaseDir = "/opt/cnterra-loader/"
 	TmpDir  = "/opt/cnterra-loader/tmp/"
 
+	Address    = "0.0.0.0"
 	Port       = "8080"
 	NodeID     = 0
 	NodeEx     = "cnterra-node-data"
@@ -36,6 +37,9 @@ func Initialize() {
 		SerialPort = str
 	}
 
+	if str, found := os.LookupEnv("LOADER_ADDRESS"); found {
+		Address = str
+	}
 	if str, found := os.LookupEnv("LOADER_PORT"); found {
 		Port = str
 	}
