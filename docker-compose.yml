@@ -9,7 +9,7 @@ services:
     container_name: cnterra-loader
     environment:
       NODE_ID: 1
-      LOADER_PORT: 8080
+      CNTERRA_PORT: 8080
       SERIAL_PORT: /dev/ttyUSB0
       RABBITMQ_ADDRESS: localhost
     restart: always

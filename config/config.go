@@ -37,10 +37,10 @@ func Initialize() {
 		SerialPort = str
 	}
 
-	if str, found := os.LookupEnv("LOADER_ADDRESS"); found {
+	if str, found := os.LookupEnv("CNTERRA_ADDRESS"); found {
 		Address = str
 	}
-	if str, found := os.LookupEnv("LOADER_PORT"); found {
+	if str, found := os.LookupEnv("CNTERRA_PORT"); found {
 		Port = str
 	}
 
