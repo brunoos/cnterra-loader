@@ -11,4 +11,4 @@ msp430-objcopy --output-target=ihex $FILE $IHEX
 
 #tos-set-symbols --objcopy msp430-objcopy --objdump msp430-objdump --target ihex $IHEX $IHEXID TOS_NODE_ID=$2 ActiveMessageAddressC__addr=$2 
 
-python2.7 /opt/cnterra-loader/tos-bsl.py --telosb -c $PORT -r -e -I -p $IHEX
+python2.7 /opt/cnterra-loader/tos-bsl --telosb -c $PORT -r -e -I -p $IHEX
